@@ -5,19 +5,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class RunnerEntity {
+public class RunnerEntity
+{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long runnerId;
     private String runnerName;
     private long pace;
+    private long shoeSize;
 
     @OneToMany(mappedBy = "runner")
     private List<LapTimeEntity> laptimes = new ArrayList<>();
 
 
-    public RunnerEntity() {
-    }
+    public RunnerEntity() { }
 
     public long getRunnerId() {
         return runnerId;
@@ -45,5 +46,12 @@ public class RunnerEntity {
 
     public List<LapTimeEntity> getLaptimes() {
         return laptimes;
+    }
+
+    public long getShoeSize() {
+        return shoeSize;
+    }
+    public void setShoeSize(long shoeSize) {
+        this.shoeSize = shoeSize;
     }
 }

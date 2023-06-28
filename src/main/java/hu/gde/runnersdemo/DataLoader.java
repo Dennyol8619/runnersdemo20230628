@@ -5,22 +5,25 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class DataLoader implements CommandLineRunner {
-
+public class DataLoader implements CommandLineRunner
+{
     private final RunnerRepository runnerRepository;
     private final LapTimeRepository lapTimeRepository;
 
     @Autowired
-    public DataLoader(RunnerRepository runnerRepository, LapTimeRepository lapTimeRepository) {
+    public DataLoader(RunnerRepository runnerRepository, LapTimeRepository lapTimeRepository)
+    {
         this.runnerRepository = runnerRepository;
         this.lapTimeRepository = lapTimeRepository;
     }
 
     @Override
-    public void run(String... args) {
+    public void run(String... args)
+    {
         RunnerEntity runnerEntity = new RunnerEntity();
         runnerEntity.setRunnerName("Tomi");
         runnerEntity.setPace(110);
+        runnerEntity.setShoeSize(42);
         runnerRepository.save(runnerEntity);
 
 
@@ -42,6 +45,7 @@ public class DataLoader implements CommandLineRunner {
         RunnerEntity runnerEntity2 = new RunnerEntity();
         runnerEntity2.setRunnerName("Zsuzsi");
         runnerEntity2.setPace(100);
+        runnerEntity2.setShoeSize(38);
         runnerRepository.save(runnerEntity2);
 
         LapTimeEntity laptime3 = new LapTimeEntity();
@@ -58,6 +62,27 @@ public class DataLoader implements CommandLineRunner {
 
         runnerEntity2.getLaptimes().add(laptime3);
         runnerEntity2.getLaptimes().add(laptime4);
+
+
+        RunnerEntity runnerEntity3 = new RunnerEntity();
+        runnerEntity3.setRunnerName("Laci");
+        runnerEntity3.setPace(110);
+        runnerEntity3.setShoeSize(40);
+        runnerRepository.save(runnerEntity3);
+
+        LapTimeEntity laptime5 = new LapTimeEntity();
+        laptime5.setLapNumber(1);
+        laptime5.setTimeSeconds(95);
+        laptime5.setRunner(runnerEntity3);
+        lapTimeRepository.save(laptime5);
+
+        LapTimeEntity laptime6 = new LapTimeEntity();
+        laptime6.setLapNumber(2);
+        laptime6.setTimeSeconds(100);
+        laptime6.setRunner(runnerEntity3);
+        lapTimeRepository.save(laptime6);
+
+        runnerEntity3.getLaptimes().add(laptime5);
+        runnerEntity3.getLaptimes().add(laptime6);
     }
 }
-
