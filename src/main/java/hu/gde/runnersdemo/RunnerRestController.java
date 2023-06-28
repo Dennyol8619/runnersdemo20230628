@@ -14,12 +14,14 @@ public class RunnerRestController
     @Autowired
     private LapTimeRepository lapTimeRepository;
     private RunnerRepository runnerRepository;
+    private ShoeRepository shoeRepository;
 
     @Autowired
-    public RunnerRestController(RunnerRepository runnerRepository, LapTimeRepository lapTimeRepository)
+    public RunnerRestController(RunnerRepository runnerRepository, LapTimeRepository lapTimeRepository, ShoeRepository shoeRepository)
     {
         this.runnerRepository = runnerRepository;
         this.lapTimeRepository = lapTimeRepository;
+        this.shoeRepository = shoeRepository;
     }
 
     @GetMapping("/{id}")
@@ -99,5 +101,46 @@ public class RunnerRestController
             }
         }
         return biggestN;
+    }
+
+    @PostMapping("/{id}/setshoe")
+    public ResponseEntity setShoe(@PathVariable Long id, @RequestBody ShoeRequest shoeRequest)
+    {
+        RunnerEntity runner = runnerRepository.findById(id).orElse(null);
+        ShoeEntity shoe = shoeRepository.findById(shoeRequest.getShoeId()).orElse(null);
+        if (runner != null && shoe != null)
+        {
+            runner.setShoe(shoe);
+            runnerRepository.save(runner);
+            return ResponseEntity.ok().build();
+        }
+        else
+        {
+            if (runner != null)
+            {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Runner with ID " + id + " not found");
+            }
+            if (shoe != null)
+            {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Shoe with ID " + id + " not found");
+            }
+            else
+            {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Something went wrong");
+            }
+        }
+    }
+
+    public static class ShoeRequest
+    {
+        private long shoeId;
+
+        public long getShoeId() {
+            return shoeId;
+        }
+
+        public void setShoeId(long shoeId) {
+            this.shoeId = shoeId;
+        }
     }
 }
