@@ -9,14 +9,15 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/runner")
-public class RunnerRestController {
-
+public class RunnerRestController
+{
     @Autowired
     private LapTimeRepository lapTimeRepository;
     private RunnerRepository runnerRepository;
 
     @Autowired
-    public RunnerRestController(RunnerRepository runnerRepository, LapTimeRepository lapTimeRepository) {
+    public RunnerRestController(RunnerRepository runnerRepository, LapTimeRepository lapTimeRepository)
+    {
         this.runnerRepository = runnerRepository;
         this.lapTimeRepository = lapTimeRepository;
     }
@@ -27,17 +28,22 @@ public class RunnerRestController {
     }
 
     @GetMapping("/{id}/averagelaptime")
-    public double getAverageLaptime(@PathVariable Long id) {
+    public double getAverageLaptime(@PathVariable Long id)
+    {
         RunnerEntity runner = runnerRepository.findById(id).orElse(null);
-        if (runner != null) {
+        if (runner != null)
+        {
             List<LapTimeEntity> laptimes = runner.getLaptimes();
             int totalTime = 0;
-            for (LapTimeEntity laptime : laptimes) {
+            for (LapTimeEntity laptime : laptimes)
+            {
                 totalTime += laptime.getTimeSeconds();
             }
             double averageLaptime = (double) totalTime / laptimes.size();
             return averageLaptime;
-        } else {
+        }
+        else
+        {
             return -1.0;
         }
     }
@@ -48,20 +54,25 @@ public class RunnerRestController {
     }
 
     @PostMapping("/{id}/addlaptime")
-    public ResponseEntity addLaptime(@PathVariable Long id, @RequestBody LapTimeRequest lapTimeRequest) {
+    public ResponseEntity addLaptime(@PathVariable Long id, @RequestBody LapTimeRequest lapTimeRequest)
+    {
         RunnerEntity runner = runnerRepository.findById(id).orElse(null);
-        if (runner != null) {
+        if (runner != null)
+        {
             LapTimeEntity lapTime = new LapTimeEntity();
             lapTime.setTimeSeconds(lapTimeRequest.getLapTimeSeconds());
             lapTime.setLapNumber(runner.getLaptimes().size() + 1);
             lapTime.setRunner(runner);
             lapTimeRepository.save(lapTime);
             return ResponseEntity.ok().build();
-        } else {
+        }
+        else
+        {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Runner with ID " + id + " not found");
         }
     }
-    public static class LapTimeRequest {
+    public static class LapTimeRequest
+    {
         private int lapTimeSeconds;
 
         public int getLapTimeSeconds() {
@@ -71,5 +82,22 @@ public class RunnerRestController {
         public void setLapTimeSeconds(int lapTimeSeconds) {
             this.lapTimeSeconds = lapTimeSeconds;
         }
+    }
+
+    @GetMapping("/biggestshoe")
+    public String getBiggestShoe()
+    {
+        List<RunnerEntity> runners = runnerRepository.findAll();
+        String biggestN = runners.get(0).getRunnerName();
+        long biggestS = runners.get(0).getShoeSize();
+        for (RunnerEntity item : runners)
+        {
+            if (item.getShoeSize() > biggestS)
+            {
+                biggestN = item.getRunnerName();
+                biggestS = item.getShoeSize();
+            }
+        }
+        return biggestN;
     }
 }

@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "3280806a-0a27-445f-b66a-efc67205ca2f",
-		"name": "Runners demo",
+		"_postman_id": "b1604ed9-4521-466a-8615-5b35a08c191d",
+		"name": "Runners demo Copy",
 		"description": "Runners Demo postman collection",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "9701363"
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "28218956"
 	},
 	"item": [
 		{
@@ -12,20 +12,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/v1/runner/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"v1",
-						"runner",
-						"1"
-					]
-				}
+				"url": "http://localhost:8080/api/v1/runner/1"
 			},
 			"response": []
 		},
@@ -34,19 +21,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/v1/runner",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"v1",
-						"runner"
-					]
-				}
+				"url": "http://localhost:8080/api/v1/runner"
 			},
 			"response": []
 		},
@@ -55,21 +30,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/v1/runner/1/averagelaptime",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"v1",
-						"runner",
-						"1",
-						"averagelaptime"
-					]
-				}
+				"url": "http://localhost:8080/api/v1/runner/1/averagelaptime"
 			},
 			"response": []
 		},
@@ -119,21 +80,16 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "http://localhost:8080/api/v1/runner/1/addlaptime",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"v1",
-						"runner",
-						"1",
-						"addlaptime"
-					]
-				}
+				"url": "http://localhost:8080/api/v1/runner/1/addlaptime"
+			},
+			"response": []
+		},
+		{
+			"name": "getBiggestShoeOwner",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/v1/runner/biggestshoe"
 			},
 			"response": []
 		}
