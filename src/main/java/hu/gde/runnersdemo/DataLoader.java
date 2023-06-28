@@ -79,7 +79,7 @@ public class DataLoader implements CommandLineRunner
 
         RunnerEntity runnerEntity3 = new RunnerEntity();
         runnerEntity3.setRunnerName("Laci");
-        runnerEntity3.setPace(110);
+        runnerEntity3.setPace(120);
         runnerEntity3.setShoeSize(40);
         runnerEntity3.setShoe(shoeEntity);
         runnerRepository.save(runnerEntity3);

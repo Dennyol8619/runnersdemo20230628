@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "laptimes")
-public class LapTimeEntity {
-
+public class LapTimeEntity
+{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -53,5 +53,4 @@ public class LapTimeEntity {
     public void setTimeSeconds(int timeSeconds) {
         this.timeSeconds = timeSeconds;
     }
-
 }
