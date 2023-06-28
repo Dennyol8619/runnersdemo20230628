@@ -17,6 +17,8 @@ public class RunnerEntity
     @OneToMany(mappedBy = "runner")
     private List<LapTimeEntity> laptimes = new ArrayList<>();
 
+    @ManyToOne
+    private ShoeEntity shoe;
 
     public RunnerEntity() { }
 
@@ -54,4 +56,8 @@ public class RunnerEntity
     public void setShoeSize(long shoeSize) {
         this.shoeSize = shoeSize;
     }
+
+    public ShoeEntity getShoe() { return shoe; }
+
+    public void setShoe(ShoeEntity shoe) { this.shoe = shoe; }
 }

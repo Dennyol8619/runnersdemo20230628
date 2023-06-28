@@ -10,20 +10,32 @@ public class DataLoader implements CommandLineRunner
     private final RunnerRepository runnerRepository;
     private final LapTimeRepository lapTimeRepository;
 
+    private  final  ShoeRepository shoeRepository;
+
     @Autowired
-    public DataLoader(RunnerRepository runnerRepository, LapTimeRepository lapTimeRepository)
+    public DataLoader(RunnerRepository runnerRepository, LapTimeRepository lapTimeRepository, ShoeRepository shoeRepository)
     {
         this.runnerRepository = runnerRepository;
         this.lapTimeRepository = lapTimeRepository;
+        this.shoeRepository = shoeRepository;
     }
 
     @Override
     public void run(String... args)
     {
+        ShoeEntity shoeEntity = new ShoeEntity();
+        shoeEntity.setShoeName("Nike");
+        shoeRepository.save(shoeEntity);
+
+        ShoeEntity shoeEntity2 = new ShoeEntity();
+        shoeEntity2.setShoeName("Adidas");
+        shoeRepository.save(shoeEntity2);
+
         RunnerEntity runnerEntity = new RunnerEntity();
         runnerEntity.setRunnerName("Tomi");
         runnerEntity.setPace(110);
         runnerEntity.setShoeSize(42);
+        runnerEntity.setShoe(shoeEntity);
         runnerRepository.save(runnerEntity);
 
 
@@ -46,6 +58,7 @@ public class DataLoader implements CommandLineRunner
         runnerEntity2.setRunnerName("Zsuzsi");
         runnerEntity2.setPace(100);
         runnerEntity2.setShoeSize(38);
+        runnerEntity2.setShoe(shoeEntity2);
         runnerRepository.save(runnerEntity2);
 
         LapTimeEntity laptime3 = new LapTimeEntity();
@@ -68,6 +81,7 @@ public class DataLoader implements CommandLineRunner
         runnerEntity3.setRunnerName("Laci");
         runnerEntity3.setPace(110);
         runnerEntity3.setShoeSize(40);
+        runnerEntity3.setShoe(shoeEntity);
         runnerRepository.save(runnerEntity3);
 
         LapTimeEntity laptime5 = new LapTimeEntity();
